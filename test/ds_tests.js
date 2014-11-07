@@ -3,7 +3,7 @@
 var expect = require('chai').expect;
 var paren = require('../lib/findUnbalancedParen');
 var fixer = require('../lib/infixToPostfix');
-// var evalPost = require('../lib/postfixEval');
+var evalPost = require('../lib/postfixEval');
 var pez = require('../lib/removeYellowPez');
 // var pal = require('../lib/isPalindrome');
 
@@ -19,11 +19,11 @@ describe('Infix to Postfix Converter', function() {
   });
 });
 
-// describe('Postfix Evaluator', function() {
-//   it('gets an accurate output', function() {
-//     expect(evalPost()).to.eql();
-//   });
-// });
+describe('Postfix Evaluator', function() {
+  it('gets an accurate output', function() {
+    expect(evalPost('2345*+*6+')).to.eql(52);
+  });
+});
 
 describe('Remove Yellow Pez', function() {
   it('gets an accurate output', function() {
