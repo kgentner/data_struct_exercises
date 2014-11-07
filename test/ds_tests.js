@@ -5,7 +5,7 @@ var paren = require('../lib/findUnbalancedParen');
 var fixer = require('../lib/infixToPostfix');
 var evalPost = require('../lib/postfixEval');
 var pez = require('../lib/removeYellowPez');
-// var pal = require('../lib/isPalindrome');
+var pal = require('../lib/isPalindrome');
 
 describe('Find Unbalanced Parentheses', function() {
   it('gets an accurate output', function() {
@@ -31,8 +31,8 @@ describe('Remove Yellow Pez', function() {
   });
 });
 
-// describe('Palindrome Checker', function() {
-//   it('gets an accurate output', function() {
-//     expect(pal()).to.eql();
-//   });
-// });
+describe('Palindrome Checker', function() {
+  it('gets an accurate output', function() {
+    expect(pal('racecar')).to.eql(true);
+  });
+});
