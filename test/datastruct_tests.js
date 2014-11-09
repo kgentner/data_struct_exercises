@@ -1,45 +1,114 @@
 'use strict';
-
 var expect = require('chai').expect;
-var paren = require('../lib/findUnbalancedParen');
-var fixer = require('../lib/infixToPostfix');
-var evalPost = require('../lib/postfixEval');
-var pez = require('../lib/removeYellowPez');
-var pal = require('../lib/isPalindrome');
+
+//stack exercises
+var findUnbalancedParen = require('../lib/findUnbalancedParen');
+var infixToPostfix = require('../lib/infixToPostfix');
+var postfixEval = require('../lib/postfixEval');
+var removeYellowPez = require('../lib/removeYellowPez');
+//queue exercises
+var Deque = require('../lib/Deque');
+var isPalindrome = require('../lib/isPalindrome');
+//linked list exercises
+var SinglyLinkedList = require('../lib/SinglyLinkedList');
+var DoublyLinkedList = require('../lib/DoublyLinkedList');
 var grade = require('../lib/gradeTracker');
 
 describe('Find Unbalanced Parentheses', function() {
-  it('gets an accurate output', function() {
-    expect(paren('3+4*6(4+8')).to.eql(5);
+  it('should get an accurate output', function() {
+    expect(findUnbalancedParen('3+4*6(4+8')).to.eql(5);
   });
 });
 
 describe('Infix to Postfix Converter', function() {
-  it('gets an accurate output', function() {
-    expect(fixer('2*(3+4*5)+6')).to.eql('2345*+*6+');
+  it('should get an accurate output', function() {
+    expect(infixToPostfix ('2*(3+4*5)+6')).to.eql('2345*+*6+');
   });
 });
 
 describe('Postfix Evaluator', function() {
-  it('gets an accurate output', function() {
-    expect(evalPost('2345*+*6+')).to.eql(52);
+  it('should get an accurate output', function() {
+    expect(postfixEval('2345*+*6+')).to.eql(52);
   });
 });
 
 describe('Remove Yellow Pez', function() {
-  it('gets an accurate output', function() {
-    expect(pez(['r', 'y', 'w', 'r', 'r'])).to.eql(['r', 'w', 'r', 'r']);
+  it('should get an accurate output', function() {
+    expect(removeYellowPez(['r', 'y', 'w', 'r', 'r']))
+    .to.eql(['r', 'w', 'r', 'r']);
   });
+});
+
+describe('Deque', function() {
+  var d = new Deque();
+  d.addBack('B');
+
+  it('should add an item to the front', function() {
+    d.addFront('A');
+    expect(d.toString()).to.eql('A' + '\n' + 'B' + '\n');
+  });
+
+  it('should add an item to the back', function() {
+    d.addBack('C');
+    expect(d.toString()).to.eql('A' + '\n' + 'B' + '\n' + 'C' + '\n');
+  });
+
+  it('should remove an item from the front', function() {
+    d.removeFront('A');
+    expect(d.toString()).to.eql('B' + '\n' + 'C' + '\n');
+  });
+
+  it('should remove an item from the back', function() {
+    d.removeBack('C');
+    expect(d.toString()).to.eql('B' + '\n');
+  });
+
 });
 
 describe('Palindrome Checker', function() {
-  it('gets an accurate output', function() {
-    expect(pal('racecar')).to.eql(true);
+  it('should get an accurate output', function() {
+    expect(isPalindrome('racecar')).to.eql(true);
   });
 });
 
+describe('Singly Linked List', function() {
+  var sll = new SinglyLinkedList();
+  sll.insert('A', 'head');
+  sll.insert('B', 'A');
+  sll.insert('C', 'B');
+  sll.insert('D', 'C');
+  sll.insert('E', 'D');
+
+  it('should advance an item toward the tail', function() {
+    sll.toTail('B', 2);
+    expect(sll.toString())
+    .to.eql('A' + '\n' + 'C' + '\n' + 'D' + '\n' + 'B' + '\n' + 'E' + '\n');
+  });
+
+  it('should show a given node\'s location', function() {
+    expect(sll.show('E')).to.eql(5);
+  });
+
+});
+
+describe('Doubly Linked List', function() {
+  var dll = new DoublyLinkedList();
+  dll.insert('A', 'head');
+  dll.insert('B', 'A');
+  dll.insert('C', 'B');
+  dll.insert('D', 'C');
+  dll.insert('E', 'D');
+
+  it('should move an item back toward the head', function() {
+    dll.toHead('D', 2);
+    expect(dll.toString())
+    .to.eql('A' + '\n' + 'D' + '\n' + 'B' + '\n' + 'C' + '\n' + 'E' + '\n');
+  });
+
+});
+
 describe('Grade Tracker', function() {
-  it('gets an accurate output', function() {
+  it('should get an accurate output', function() {
     expect(grade('Karl', 'A', 'Chareesa', 'A', 'Stephanie', 'A'))
     .to.eql('Karl:(A) Chareesa:(A) Stephanie:(A) ');
   });
