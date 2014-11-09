@@ -14,7 +14,7 @@ var ERQueue = require('../lib/ERQueue');
 //linked list exercises
 var SinglyLinkedList = require('../lib/SinglyLinkedList');
 var DoublyLinkedList = require('../lib/DoublyLinkedList');
-var grade = require('../lib/gradeTracker');
+var gradeTracker = require('../lib/gradeTracker');
 
 describe('Find Unbalanced Parentheses', function() {
   it('should get an accurate output', function() {
@@ -75,7 +75,6 @@ describe('Palindrome Checker', function() {
 
 describe('Emergency Room Priority Queue', function() {
   var erq = new ERQueue();
-  var seen;
   var p = new Patient('Karl', 1);
   erq.enqueue(p);
   p = new Patient('Carlito', 6);
@@ -89,8 +88,8 @@ describe('Emergency Room Priority Queue', function() {
   });
 
   it('should treat the Patient with the highest code number', function() {
-    seen = erq.dequeue();
-    expect(seen[0].name).to.eql('Carlito');
+    this.seen = erq.dequeue();
+    expect(this.seen[0].name).to.eql('Carlito');
   });
 
   it('should return a list of untreated patients', function() {
@@ -137,7 +136,7 @@ describe('Doubly Linked List', function() {
 
 describe('Grade Tracker', function() {
   it('should get an accurate output', function() {
-    expect(grade('Karl', 'A', 'Chareesa', 'A', 'Stephanie', 'A'))
+    expect(gradeTracker('Karl', 'A', 'Chareesa', 'A', 'Stephanie', 'A'))
     .to.eql('Karl:(A) Chareesa:(A) Stephanie:(A) ');
   });
 });
