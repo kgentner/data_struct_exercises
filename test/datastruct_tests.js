@@ -9,6 +9,8 @@ var removeYellowPez = require('../lib/removeYellowPez');
 //queue exercises
 var Deque = require('../lib/Deque');
 var isPalindrome = require('../lib/isPalindrome');
+var Patient = require('../lib/Patient');
+var ERQueue = require('../lib/ERQueue');
 //linked list exercises
 var SinglyLinkedList = require('../lib/SinglyLinkedList');
 var DoublyLinkedList = require('../lib/DoublyLinkedList');
@@ -69,6 +71,32 @@ describe('Palindrome Checker', function() {
   it('should get an accurate output', function() {
     expect(isPalindrome('racecar')).to.eql(true);
   });
+});
+
+describe('Emergency Room Priority Queue', function() {
+  var erq = new ERQueue();
+  var seen;
+  var p = new Patient('Karl', 1);
+  erq.enqueue(p);
+  p = new Patient('Carlito', 6);
+  erq.enqueue(p);
+  p = new Patient('Carl', 3);
+  erq.enqueue(p);
+
+  it('should add new Patients to the queue', function() {
+    expect(erq.toString())
+    .to.eql('Karl code: 1\n' + 'Carlito code: 6\n' + 'Carl code: 3\n');
+  });
+
+  it('should treat the Patient with the highest code number', function() {
+    seen = erq.dequeue();
+    expect(seen[0].name).to.eql('Carlito');
+  });
+
+  it('should return a list of untreated patients', function() {
+    expect(erq.toString()).to.eql('Karl code: 1\n' + 'Carl code: 3\n');
+  });
+
 });
 
 describe('Singly Linked List', function() {
